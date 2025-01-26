@@ -1,4 +1,5 @@
 import CalendarPreview from "@/components/calendar-preview";
+import HabitCardDropdown from "@/components/habit-card-dropdown";
 import {
   Card,
   CardHeader,
@@ -7,7 +8,6 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { EllipsisVertical } from "lucide-react";
 
 export default function Home() {
   const {
@@ -35,8 +35,7 @@ export default function Home() {
           <CalendarPreview days={completedDays} />
           {/* This will toggle completed */}
           <Checkbox className="size-6 rounded-full" />
-          {/* Menu for edit and delete */}
-          <EllipsisVertical />
+          <HabitCardDropdown />
         </div>
         <CardHeader>
           <CardTitle>{title}</CardTitle>
