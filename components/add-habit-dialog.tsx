@@ -1,3 +1,4 @@
+"use client";
 import {
   Dialog,
   DialogContent,
@@ -9,10 +10,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import HabitForm from "@/components/habit-form";
+import { useState } from "react";
 
 export default function AddHabitDialog() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
           size="icon"
@@ -25,7 +29,7 @@ export default function AddHabitDialog() {
           <DialogTitle>Add Habit</DialogTitle>
           <DialogDescription />
         </DialogHeader>
-        <HabitForm />
+        <HabitForm closeDialog={() => setIsOpen(false)} />
       </DialogContent>
     </Dialog>
   );

@@ -14,8 +14,17 @@ import {
 } from "@/components/ui/select";
 import { categories } from "@/lib";
 import { slugify } from "@/lib/utils";
+import { addHabit } from "@/actions";
+import { toast } from "@/hooks/use-toast";
+import { useHabitContext } from "@/components/habits-provider";
 
-export default function HabitForm() {
+interface HabitFormProps {
+  closeDialog: () => void;
+}
+
+export default function HabitForm({ closeDialog }: HabitFormProps) {
+  const { setHabits } = useHabitContext();
+
   return (
     <Formik
       initialValues={{
@@ -26,9 +35,14 @@ export default function HabitForm() {
         title: y.string().max(25).required(),
         category: y.string().required(),
       })}
-      onSubmit={(values, { resetForm }) => {
-        console.log(values);
+      onSubmit={({ title, category }, { resetForm }) => {
+        const habits = addHabit(title, category);
+        setHabits(habits);
+        toast({
+          title: `Added Habit: '${title}'`,
+        });
         resetForm();
+        closeDialog();
       }}>
       {({ values: { category }, isSubmitting, setFieldValue }) => (
         <Form className="grid gap-4">
