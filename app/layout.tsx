@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
-import HabitProvider from "@/components/habits-provider";
+import { HabitsProvider } from "@/components/habits-provider";
 
 const workSans = localFont({
   src: "./fonts/WorkSans.ttf",
@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${workSans.variable} antialiased`}>
-        <HabitProvider>{children}</HabitProvider>
+        <HabitsProvider>{children}</HabitsProvider>
         <Toaster />
       </body>
     </html>

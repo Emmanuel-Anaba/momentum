@@ -12,7 +12,7 @@ import {
 } from "react";
 import { Loader2 } from "lucide-react";
 
-const HabitContext = createContext<{
+const HabitsContext = createContext<{
   habits: Habit[];
   setHabits: Dispatch<SetStateAction<Habit[] | null>>;
 }>({
@@ -20,7 +20,18 @@ const HabitContext = createContext<{
   setHabits: () => {},
 });
 
-export default function HabitProvider({ children }: { children: ReactNode }) {
+const HabitContext = createContext<Habit>({
+  id: "",
+  title: "",
+  category: "",
+  createdAt: new Date(),
+  editedAt: new Date(),
+  currentStreak: 0,
+  longestStreak: 0,
+  completedDays: [],
+});
+
+export function HabitsProvider({ children }: { children: ReactNode }) {
   const [habits, setHabits] = useState<Habit[] | null>(null);
 
   useEffect(() => setHabits(getHabits()), []);
@@ -35,14 +46,28 @@ export default function HabitProvider({ children }: { children: ReactNode }) {
     );
 
   return (
-    <HabitContext.Provider
+    <HabitsContext.Provider
       value={{
         habits,
         setHabits,
       }}>
       {children}
-    </HabitContext.Provider>
+    </HabitsContext.Provider>
   );
 }
 
-export const useHabitContext = () => useContext(HabitContext);
+export function HabitProvider({
+  children,
+  habit,
+}: {
+  children: ReactNode;
+  habit: Habit;
+}) {
+  return (
+    <HabitContext.Provider value={habit}>{children}</HabitContext.Provider>
+  );
+}
+
+export const useHabitsContext = () => useContext(HabitsContext);
+
+export const useHabit = () => useContext(HabitContext);

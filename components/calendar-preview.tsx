@@ -9,10 +9,13 @@ import {
 } from "@/components/ui/dialog";
 import { Calendar } from "@/components/ui/calendar";
 import { CalendarDays } from "lucide-react";
+import { useHabit } from "@/components/habits-provider";
 
-export default function CalendarPreview({ days }: { days: string[] }) {
+export default function CalendarPreview() {
+  const { completedDays } = useHabit();
+
   const highlighted = (date: Date) => {
-    return days
+    return completedDays
       .map((dateString) => new Date(dateString))
       .some(
         (highlightedDate) =>
