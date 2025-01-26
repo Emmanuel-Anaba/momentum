@@ -12,6 +12,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { categories } from "@/lib";
+import { slugify } from "@/lib/utils";
 
 export default function HabitForm() {
   return (
@@ -52,8 +54,11 @@ export default function HabitForm() {
                 <SelectValue placeholder="Select a category" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="work">Work</SelectItem>
-                <SelectItem value="health">Health</SelectItem>
+                {categories.map((item, i) => (
+                  <SelectItem key={i} value={slugify(item)}>
+                    {item}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
             <ErrorMessage
