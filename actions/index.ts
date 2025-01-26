@@ -13,3 +13,17 @@ export function saveHabits(updatedHabits: Habit[]) {
   if (typeof window !== "undefined")
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedHabits));
 }
+
+export function deleteHabit(id: string) {
+  const updatedHabits = getHabits().filter((habit) => habit.id !== id);
+  return updatedHabits;
+}
+
+export function editHabit(id: string, title: string, category: string) {
+  const updatedHabits = getHabits().map((habit) =>
+    habit.id === id
+      ? { ...habit, title, category, editedAt: new Date() }
+      : habit
+  );
+  return updatedHabits;
+}
