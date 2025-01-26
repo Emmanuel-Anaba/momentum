@@ -29,6 +29,17 @@ export default function Home() {
     completedDays: ["2025-1-26", "1/24/2025"],
   };
 
+  const streakUI = (streak_name: string, value: number) => {
+    return (
+      <div className="size-fit inline-grid place-items-center gap-1">
+        <span className="text-xs underline underline-offset-4">
+          {streak_name}
+        </span>
+        <span className="text-2xl font-semibold">{value}</span>
+      </div>
+    );
+  };
+
   return (
     <main className="grid md:grid-cols-2 lg:grid-cols-3">
       <Card className="relative">
@@ -45,18 +56,8 @@ export default function Home() {
           </CardDescription>
         </CardHeader>
         <CardContent className="text-sm flex flex-col gap-6">
-          <div className="size-fit inline-grid place-items-center gap-1">
-            <span className="text-xs underline underline-offset-4">
-              Current Streak
-            </span>
-            <span className="text-2xl font-semibold">{currentStreak}</span>
-          </div>
-          <div className="size-fit inline-grid place-items-center gap-1">
-            <span className="text-xs underline underline-offset-4">
-              Longest Streak
-            </span>
-            <span className="text-2xl font-semibold">{longestStreak}</span>
-          </div>
+          {streakUI("Current Streak", currentStreak)}
+          {streakUI("Longest Streak", longestStreak)}
           <div className="text-xs">
             {/* Like this 👇 */}
             {/* Sat, January 25, 2025 at 3:21:56 AM*/}
