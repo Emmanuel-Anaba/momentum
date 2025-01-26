@@ -64,9 +64,14 @@ body {
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border !outline-none !ring-0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
   }
   body {
     @apply bg-background text-foreground;
+  }
+  svg {
+    @apply size-4 inline align-middle;
   }
 }
