@@ -16,7 +16,7 @@ import { categoriesWithIcon } from "@/lib";
 import { slugify } from "@/lib/utils";
 import { addHabit, editHabit } from "@/actions";
 import { toast } from "@/hooks/use-toast";
-import { useHabitsContext } from "@/components/habits-provider";
+import { useHabit, useHabitsContext } from "@/components/habits-provider";
 import { Habit } from "@/types";
 import { Plus, Save } from "lucide-react";
 
@@ -35,6 +35,7 @@ export default function HabitForm({
   },
 }: HabitFormProps) {
   const { setHabits } = useHabitsContext();
+  const { id } = useHabit();
 
   return (
     <Formik
@@ -44,9 +45,8 @@ export default function HabitForm({
         category: y.string().required(),
       })}
       onSubmit={({ title, category }, { resetForm }) => {
-        // TODO: Get the habit id
         const habits = isEdit
-          ? editHabit("id", title, category)
+          ? editHabit(id, title, category)
           : addHabit(title, category);
         setHabits(habits);
         toast({

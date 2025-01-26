@@ -1,3 +1,4 @@
+"use client";
 import {
   Dialog,
   DialogContent,
@@ -7,11 +8,16 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Edit } from "lucide-react";
+import HabitForm from "@/components/habit-form";
+import { useHabit } from "@/components/habits-provider";
+import { useState } from "react";
 
-// This will need the id, title and category of the habit to be deleted
 export default function EditHabitDialog() {
+  const [isOpen, setIsOpen] = useState(false);
+  const { title, category } = useHabit();
+
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <div className="dropdown-menu-item">
           <Edit />
@@ -23,7 +29,11 @@ export default function EditHabitDialog() {
           <DialogTitle>Edit Habit</DialogTitle>
           <DialogDescription />
         </DialogHeader>
-        {/* A form to edit the habit's title and category */}
+        <HabitForm
+          isEdit
+          initialValues={{ title, category }}
+          closeDialog={() => setIsOpen(false)}
+        />
       </DialogContent>
     </Dialog>
   );
