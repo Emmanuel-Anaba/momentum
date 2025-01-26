@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import HabitForm from "@/components/habit-form";
 
 export default function AddHabitDialog() {
   return (
@@ -24,7 +25,7 @@ export default function AddHabitDialog() {
           <DialogTitle>Add Habit</DialogTitle>
           <DialogDescription />
         </DialogHeader>
-        {/* A form to add a habit */}
+        <HabitForm />
       </DialogContent>
     </Dialog>
   );
