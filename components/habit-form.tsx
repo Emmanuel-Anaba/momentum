@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { categories } from "@/lib";
+import { categoriesWithIcon } from "@/lib";
 import { slugify } from "@/lib/utils";
 import { addHabit, editHabit } from "@/actions";
 import { toast } from "@/hooks/use-toast";
@@ -44,8 +44,8 @@ export default function HabitForm({
         category: y.string().required(),
       })}
       onSubmit={({ title, category }, { resetForm }) => {
+        // TODO: Get the habit id
         const habits = isEdit
-          // TODO: Get the habit id
           ? editHabit("id", title, category)
           : addHabit(title, category);
         setHabits(habits);
@@ -79,8 +79,9 @@ export default function HabitForm({
                 <SelectValue placeholder="Select a category" />
               </SelectTrigger>
               <SelectContent>
-                {categories.map((item, i) => (
+                {categoriesWithIcon.map(({ Icon, item }, i) => (
                   <SelectItem key={i} value={slugify(item)}>
+                    <Icon className="mr-2" />
                     {item}
                   </SelectItem>
                 ))}

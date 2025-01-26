@@ -1,3 +1,5 @@
+import { getIconForCategory } from "@/lib/utils";
+
 export const categories = [
   "Health",
   "Fitness",
@@ -10,3 +12,8 @@ export const categories = [
   "Hobby",
   "Spirituality",
 ];
+
+export const categoriesWithIcon = categories.map((item) => ({
+  item,
+  Icon: getIconForCategory(item),
+}));
