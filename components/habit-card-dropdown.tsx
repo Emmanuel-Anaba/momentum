@@ -4,8 +4,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Edit, EllipsisVertical } from "lucide-react";
+import { EllipsisVertical } from "lucide-react";
 import DeleteHabitDialog from "@/components/delete-habit-dialog";
+import EditHabitDialog from "@/components/edit-habit-dialog";
 
 export default function HabitCardDropdown() {
   return (
@@ -14,9 +15,8 @@ export default function HabitCardDropdown() {
         <EllipsisVertical />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem>
-          <Edit />
-          Edit
+        <DropdownMenuItem asChild>
+          <EditHabitDialog />
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <DeleteHabitDialog />
