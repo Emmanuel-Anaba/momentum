@@ -8,6 +8,7 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
+import { unslugify } from "@/lib/utils";
 
 export default function Home() {
   const {
@@ -40,8 +41,7 @@ export default function Home() {
         <CardHeader>
           <CardTitle>{title}</CardTitle>
           <CardDescription className="flex items-center gap-1">
-            {/* unslugify */}
-            {category}
+            {unslugify(category)}
           </CardDescription>
         </CardHeader>
         <CardContent className="text-sm flex flex-col gap-6">
