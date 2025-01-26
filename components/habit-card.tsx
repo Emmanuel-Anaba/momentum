@@ -7,10 +7,10 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
 import { formatDate, unslugify } from "@/lib/utils";
 import { Habit } from "@/types";
 import { HabitProvider } from "@/components/habits-provider";
+import { HabitToggle } from "@/components/habit-toggle";
 
 export default function HabitCard({ habit }: { habit: Habit }) {
   const { currentStreak, longestStreak, title, category, createdAt, editedAt } =
@@ -32,8 +32,7 @@ export default function HabitCard({ habit }: { habit: Habit }) {
       <Card className="relative">
         <div className="absolute top-4 right-4 flex items-center gap-2">
           <CalendarPreview />
-          {/* This will toggle completed */}
-          <Checkbox className="size-6 rounded-full" />
+          <HabitToggle/>
           <HabitCardDropdown />
         </div>
         <CardHeader>
