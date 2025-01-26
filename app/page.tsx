@@ -1,3 +1,4 @@
+import AddHabitDialog from "@/components/add-habit-dialog";
 import CalendarPreview from "@/components/calendar-preview";
 import HabitCardDropdown from "@/components/habit-card-dropdown";
 import {
@@ -9,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { formatDate, unslugify } from "@/lib/utils";
+
 
 export default function Home() {
   const {
@@ -64,6 +66,7 @@ export default function Home() {
           </div>
         </CardContent>
       </Card>
+      <AddHabitDialog />
     </main>
   );
 }
