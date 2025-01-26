@@ -14,32 +14,43 @@ import {
 } from "@/components/ui/select";
 import { categories } from "@/lib";
 import { slugify } from "@/lib/utils";
-import { addHabit } from "@/actions";
+import { addHabit, editHabit } from "@/actions";
 import { toast } from "@/hooks/use-toast";
 import { useHabitContext } from "@/components/habits-provider";
+import { Habit } from "@/types";
+import { Plus, Save } from "lucide-react";
 
 interface HabitFormProps {
   closeDialog: () => void;
+  isEdit?: boolean;
+  initialValues?: Pick<Habit, "title" | "category">;
 }
 
-export default function HabitForm({ closeDialog }: HabitFormProps) {
+export default function HabitForm({
+  closeDialog,
+  isEdit = false,
+  initialValues = {
+    title: "",
+    category: "",
+  },
+}: HabitFormProps) {
   const { setHabits } = useHabitContext();
 
   return (
     <Formik
-      initialValues={{
-        title: "",
-        category: "",
-      }}
+      initialValues={initialValues}
       validationSchema={y.object().shape({
         title: y.string().max(25).required(),
         category: y.string().required(),
       })}
       onSubmit={({ title, category }, { resetForm }) => {
-        const habits = addHabit(title, category);
+        const habits = isEdit
+          // TODO: Get the habit id
+          ? editHabit("id", title, category)
+          : addHabit(title, category);
         setHabits(habits);
         toast({
-          title: `Added Habit: '${title}'`,
+          title: isEdit ? "Edited Habit!" : `Added Habit: '${title}'!`,
         });
         resetForm();
         closeDialog();
@@ -83,7 +94,17 @@ export default function HabitForm({ closeDialog }: HabitFormProps) {
           </div>
           <DialogFooter>
             <Button disabled={isSubmitting} type="submit">
-              Submit
+              {isEdit ? (
+                <>
+                  <Save />
+                  Save
+                </>
+              ) : (
+                <>
+                  <Plus />
+                  Add
+                </>
+              )}
             </Button>
           </DialogFooter>
         </Form>
