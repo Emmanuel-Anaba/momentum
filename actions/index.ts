@@ -27,3 +27,18 @@ export function editHabit(id: string, title: string, category: string) {
   );
   return updatedHabits;
 }
+
+export function addHabit(title: string, category: string) {
+  const newHabit: Habit = {
+    id: crypto.randomUUID(),
+    title,
+    category,
+    createdAt: new Date(),
+    currentStreak: 0,
+    longestStreak: 0,
+    editedAt: new Date(),
+    completedDays: [],
+  };
+  const updatedHabits: Habit[] = [...getHabits(), newHabit];
+  return updatedHabits;
+}
