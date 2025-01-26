@@ -8,7 +8,7 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { unslugify } from "@/lib/utils";
+import { formatDate, unslugify } from "@/lib/utils";
 
 export default function Home() {
   const {
@@ -24,8 +24,8 @@ export default function Home() {
     category: "work",
     currentStreak: 9,
     longestStreak: 16,
-    createdAt: new Date().toLocaleDateString(),
-    editedAt: new Date().toLocaleDateString(),
+    createdAt: new Date(),
+    editedAt: new Date(),
     completedDays: ["2025-1-26", "1/24/2025"],
   };
 
@@ -59,10 +59,8 @@ export default function Home() {
           {streakUI("Current Streak", currentStreak)}
           {streakUI("Longest Streak", longestStreak)}
           <div className="text-xs">
-            {/* Like this 👇 */}
-            {/* Sat, January 25, 2025 at 3:21:56 AM*/}
-            <p>Created: {createdAt}</p>
-            <p>Last Edited: {editedAt}</p>
+            <p>Created: {formatDate(createdAt)}</p>
+            <p>Last Edited: {formatDate(editedAt)}</p>
           </div>
         </CardContent>
       </Card>
