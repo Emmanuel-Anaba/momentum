@@ -2,7 +2,6 @@
 import { toggleHabit } from "@/actions";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useHabit, useHabitsContext } from "@/components/habits-provider";
-import { Habit } from "@/types";
 
 export function HabitToggle() {
   const { setHabits } = useHabitsContext();
