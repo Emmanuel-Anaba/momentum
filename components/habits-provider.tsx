@@ -1,9 +1,8 @@
 "use client";
 import { getHabits, saveHabits } from "@/actions";
-import { Habit } from "@/types";
+import { Habit, LayoutProps } from "@/types";
 import {
   createContext,
-  ReactNode,
   useContext,
   useState,
   Dispatch,
@@ -31,7 +30,7 @@ const HabitContext = createContext<Habit>({
   completedDays: [],
 });
 
-export function HabitsProvider({ children }: { children: ReactNode }) {
+export function HabitsProvider({ children }: LayoutProps) {
   const [habits, setHabits] = useState<Habit[] | null>(null);
 
   useEffect(() => setHabits(getHabits()), []);
@@ -59,10 +58,7 @@ export function HabitsProvider({ children }: { children: ReactNode }) {
 export function HabitProvider({
   children,
   habit,
-}: {
-  children: ReactNode;
-  habit: Habit;
-}) {
+}: LayoutProps & { habit: Habit }) {
   return (
     <HabitContext.Provider value={habit}>{children}</HabitContext.Provider>
   );

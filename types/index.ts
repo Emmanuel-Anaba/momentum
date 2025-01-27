@@ -8,3 +8,7 @@ export interface Habit {
   longestStreak: number;
   completedDays: string[];
 }
+
+export interface LayoutProps {
+  children: React.ReactNode;
+}
