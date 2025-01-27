@@ -1,3 +1,4 @@
+"use client";
 import {
   Dialog,
   DialogTrigger,
@@ -10,11 +11,18 @@ import {
 } from "@/components/ui/dialog";
 import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { deleteHabit } from "@/actions";
+import { useHabit, useHabitsContext } from "./habits-provider";
+import { useState } from "react";
+import { toast } from "@/hooks/use-toast";
 
-// This will need the id and title of the habit to be deleted
 export default function DeleteHabitDialog() {
+  const { id, title } = useHabit();
+  const { setHabits } = useHabitsContext();
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <div className="dropdown-menu-item">
           <Trash2 />
@@ -29,7 +37,17 @@ export default function DeleteHabitDialog() {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button>Delete</Button>
+          <Button
+            onClick={() => {
+              const updatedHabits = deleteHabit(id);
+              setHabits(updatedHabits);
+              setIsOpen(!isOpen);
+              toast({
+                title: `Deleted Habit: '${title}'`,
+              });
+            }}>
+            Delete
+          </Button>
           <DialogClose asChild>
             <Button variant="outline">Cancel</Button>
           </DialogClose>
