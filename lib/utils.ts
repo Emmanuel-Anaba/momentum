@@ -28,7 +28,7 @@ export function unslugify(slug: string) {
 }
 
 export function formatDate(date: Date) {
-  return date.toLocaleDateString("en-US", {
+  return new Date(date).toLocaleDateString("en-US", {
     weekday: "short",
     month: "long",
     day: "numeric",
