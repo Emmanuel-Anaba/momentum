@@ -1,4 +1,5 @@
 import { HabitsProvider } from "@/components/habits-provider";
+import PWAInstallToast from "@/components/pwa-install-toast";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Toaster } from "@/components/ui/toaster";
 import { LayoutProps } from "@/types";
@@ -13,7 +14,8 @@ export default function RootLayout({ children }: LayoutProps) {
         </div>
       </header>
       <HabitsProvider>{children}</HabitsProvider>
-      <Toaster />;
+      <PWAInstallToast />
+      <Toaster />
     </>
   );
 }
